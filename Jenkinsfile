@@ -5,7 +5,7 @@ node('master') {
 	} 
 	
 	stage('Maven build') {
-        sh 'mvn -Dmaven.test.failure.ignore=true install' 
+        bat 'mvn -Dmaven.test.failure.ignore=true install' 
     }
 	
     stage('Run tests') {
