@@ -5,7 +5,7 @@ node('master') {
 	} 
 	
 	stage('Maven build') {
-        bat 'mvn clean install' 
+        bat 'mvn -Dmaven.test.failure.ignore=true clean install' 
     }
 	
     stage('Run tests') {
