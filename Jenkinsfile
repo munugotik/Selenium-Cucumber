@@ -1,28 +1,14 @@
-pipeline {
-    agent any
-    tools {
-        maven 'Maven 3.3.9'
-        jdk 'jdk8'
+node('master') {
+	
+	stage('Clone source') {		 
+        git url: 'https://github.com/munugotik/Selenium-Cucumber.git' 
+	} 
+	
+	stage('Maven build') {
+        buildInfo = rtMaven.run pom: 'SeleniumCucumber/pom.xml', goals: 'clean install'
     }
-    stages {
-        stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
-            }
-        }
-
-        stage ('Build') {
-            steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
-            }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
-                }
-            }
-        }
+	
+    stage('Run tests') {
+        echo 'Running tests'
     }
 }
