@@ -5,10 +5,10 @@ node('master') {
 	} 
 	
 	stage('Maven build') {
-        bat 'mvn -Dmaven.test.failure.ignore=true clean install' 
+        bat 'mvn -Dmaven.test.failure.ignore=true clean install test' 
     }
 	
     stage('Run tests') {
-       bat 'mvn -Dtest=runTest test' 
+       echo 'Running Cucumber tests ... '
     }
 }
